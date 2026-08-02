@@ -22,3 +22,6 @@ const meditationSchema = new mongoose.Schema({
     }
 
 },{timestamps:true})
+
+const mediModel = mongoose.model("Medi", meditationSchema);
+module.exports= mediModel;

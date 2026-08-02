@@ -1,12 +1,15 @@
 const mediModel=require('../Models/meditation.model')
-const uploadFile=require('../services/Storage.service')
+const {uploadFile}=require('../services/Storage.service')
 async function uploadMedi(req,res){
     const{title,duration,description}=req.body
     const file=req.file
     const result=await uploadFile(file.buffer.toString('base64'))
     console.log(result);
 
+    console.log(req.user);
+    
     const medi=await mediModel.create({
+        user:req.user.id,
         uri:result.url,
         title,
         description,
