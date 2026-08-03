@@ -29,9 +29,12 @@ const user = await userModel.create({
 const token = jwt.sign(
   { id: user._id },
   process.env.JWT_SECRET,
-  { expiresIn: "7d" }
+  { expiresIn: "30d" }
 )
-res.cookie("token",token)
+res.cookie("token",token,{
+     maxAge: 30* 24 * 60 * 60 * 1000
+   }
+)
 
 res.status(201).json({
         message:'user registered successfully',
@@ -64,11 +67,13 @@ async function loginUser(req,res){
    const token = jwt.sign(
   { id: user._id },
   process.env.JWT_SECRET,
-  { expiresIn: "7d" }
+  { expiresIn: "30d" }
 )
 
-   res.cookie("token",token)
-
+   res.cookie("token",token,{
+     maxAge: 30 * 24 * 60 * 60 * 1000
+   }
+)
    res.status(200).json({
     message:'user logged in successfully',
     user:{
