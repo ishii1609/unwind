@@ -7,7 +7,7 @@ const upload= multer({
     stoarge:multer.memoryStorage()
 })
 
-router.post('/upload',authCheck,upload.single('audio'),mediController.uploadMedi)
+router.post('/upload',upload.single('audio'),mediController.uploadMedi)
 router.get('/fetch',mediController.fetchMedi)
 
 

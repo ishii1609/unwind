@@ -5,7 +5,12 @@ const journalRoutes=require('./routes/journal.Routes')
 const sleepRoutes=require('./routes/sleep.Routes')
 const cookieParser =require ('cookie-parser')
 const app=express()
-app.use(express.json())
+const cors = require("cors");
+app.use(cors({
+  origin: "http://localhost:5173", // frontend ka exact URL
+  credentials: true,
+}));app.use(express.json())
+
 app.use(cookieParser());
 app.use('/api/auth',authRoutes)
 app.use('/api/medi',mediRoutes)

@@ -9,7 +9,7 @@ async function uploadMedi(req,res){
     console.log(req.user);
     
     const medi=await mediModel.create({
-        user:req.user.id,
+        
         uri:result.url,
         title,
         description,
