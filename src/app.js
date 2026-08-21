@@ -7,7 +7,7 @@ const cookieParser =require ('cookie-parser')
 const app=express()
 const cors = require("cors");
 app.use(cors({
-  origin: "http://localhost:5173", // frontend ka exact URL
+  origin: "https://unwind-frontend.vercel.app/", // frontend ka exact URL
   credentials: true,
 }));app.use(express.json())
 
