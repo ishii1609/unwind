@@ -31,10 +31,12 @@ const token = jwt.sign(
   process.env.JWT_SECRET,
   { expiresIn: "30d" }
 )
-res.cookie("token",token,{
-     maxAge: 30* 24 * 60 * 60 * 1000
-   }
-)
+res.cookie("token", token, {
+  httpOnly: true,
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",//cross site render vercel cookiie block na ho
+});
 
 res.status(201).json({
         message:'user registered successfully',
@@ -70,10 +72,12 @@ async function loginUser(req,res){
   { expiresIn: "30d" }
 )
 
-   res.cookie("token",token,{
-     maxAge: 30 * 24 * 60 * 60 * 1000
-   }
-)
+  res.cookie("token", token, {
+  httpOnly: true,
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+});
    res.status(200).json({
     message:'user logged in successfully',
     user:{
@@ -96,6 +100,5 @@ async function logoutUser(req,res){
 }
 
 module.exports={registerUser,loginUser,logoutUser}
-
 
 
